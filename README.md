@@ -1,25 +1,23 @@
-# Slightly better Huffman + RLE
-
-## Idea
+# Optimizing Huffman + RLE
 
 It's a simple observation that makes Huffman coding produce bit sequence that can be more effeciently encoded using RLE afterwards.
 After building Huffman tree we assign codes to the nodes. This is usually done by traversing tree from the top and assigning 0 bits
 when moving left and 1's when moving right. We can hook in here and provide algorithm that will decide which bit to assign.
 
 In run-length-encoding (RLE) it's better if we have more consequtive bits that are the same. Let's try assigning Huffman codes having
-this idea in mind. While building Huffman tree we assign each node an integer value - frequency. The tree is built in a greedy manner
+this idea in mind. While building Huffman tree we assign each node an integer value(frequency). The tree is built in a greedy manner
 unifying the least frequent nodes. We can use this information during code assignment. Let's assign the same bit value to the most
 frequent child as parent assigned to us.
 
 Here is an example of the Huffman coding without optimization described above.
 
 ```
-               /\              Symbol    Code   Freq
-              0  1             ------    ----   ----
-             /    \                A     01     35%
-            /\     B               B     1      50%
-           1  0                    C     001    10%
-          /    \                   D     000    5%
+               /\              Symbol    Code    Freq
+              0  1             ------    ----    ----
+             /    \                A     01      35%
+            /\     B               B     1       50%
+           1  0                    C     001     10%
+          /    \                   D     000     5%
          A     /\
               0  1
              /    \
@@ -29,12 +27,12 @@ Here is an example of the Huffman coding without optimization described above.
 And these codes use frequencies to assign bits differently.
 
 ```
-               /\              Symbol    Code   Freq
-              1  0             ------    ----   ----
-             /    \                A     11     35%
-            /\     B               B     0      50%
-           1  0                    C     100    10%
-          /    \                   D     101    5%
+               /\              Symbol    Code    Freq
+              1  0             ------    ----    ----
+             /    \                A     11      35%
+            /\     B               B     0       50%
+           1  0                    C     100     10%
+          /    \                   D     101     5%
          A     /\
               1  0
              /    \
@@ -55,5 +53,7 @@ As you can we've got a shorter sequence after applying optimization technique de
 
 ## Results
 
-After testing on some English texts I've estimated that average win is only ~1%.
-In order to check the results one can run `make` to check via text in the repo, or just pipe the text into the program. 
+After testing on some English texts I've estimated that **average win is only ~1%**.
+In order to check the results one can run `make` to check via text in the repo, or just pipe the text into the program.
+
+It's important to notice that core idea about bit assignment can be generalized and probably applicable for different other coding algorithms other than RLE.
