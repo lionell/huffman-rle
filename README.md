@@ -12,31 +12,31 @@ frequent child as parent assigned to us.
 Here is an example of the Huffman coding without optimization described above.
 
 ```
-          /\              Symbol    Code    Freq
-         0  1             ------    ----    ----
-        /    \                A     01      35%
-       /\     B               B     1       50%
-      1  0                    C     001     10%
-     /    \                   D     000     5%
-    A     /\
-         0  1
-        /    \
-       D      C
+        /\              Symbol    Code    Freq
+       0  1             ------    ----    ----
+      /    \                A     01      35%
+     /\     B               B     1       50%
+    1  0                    C     001     10%
+   /    \                   D     000     5%
+  A     /\
+       0  1
+      /    \
+     D      C
 ```
 
 And these codes use frequencies to assign bits differently.
 
 ```
-          /\              Symbol    Code    Freq
-         1  0             ------    ----    ----
-        /    \                A     11      35%
-       /\     B               B     0       50%
-      1  0                    C     100     10%
-     /    \                   D     101     5%
-    A     /\
-         1  0
-        /    \
-       D      C
+        /\              Symbol    Code    Freq
+       1  0             ------    ----    ----
+      /    \                A     11      35%
+     /\     B               B     0       50%
+    1  0                    C     100     10%
+   /    \                   D     101     5%
+  A     /\
+       1  0
+      /    \
+     D      C
 ```
 
 Now when we try to encode a string that has correct distribution of chars we get
